@@ -10,8 +10,8 @@ def load_data():
     files = [
         "Barems_Fluencies_Verbal_Global_18-94.xlsx",
         "Barems_BNT_Global_18-94.xlsx",
-        "Barems_WMSIII_Subtests_16-89.xlsx",
-        "Barems_WMSIII_Indexs_16-89.xlsx",
+        "Barems_WMSIII_Subtests_Completo_16-89.xlsx",
+        "Barems_WMSIII_Indices_Completo_16-89.xlsx",
         "Barems_RAVLT_16-95.xlsx",
         "Barems_WAISIII_Subtests_16-89.xlsx",
         "Barems_WAISIII_Indexs_16-89.xlsx",
