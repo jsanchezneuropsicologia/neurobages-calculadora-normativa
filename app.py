@@ -100,7 +100,7 @@ def generar_informe_pdf(dades):
 # --- INTERFÍCIE STREAMLIT ---
 df = load_data()
 
-st.title("🧠 Calculadora Normativa Neuropsicològica (NEURONORMA, WMS-III, RAVLT, WAIS-III, TMT, SDMT, ROCF, FCSRT)")
+st.title("🧠 Calculadora Normativa")
 
 # --- SELECCIÓ DE CATEGORIA ---
 grans_categories = [
@@ -197,3 +197,32 @@ if resultat is not None:
     )
 else:
     st.warning("⚠️ No s'ha trobat un barem exacte per aquesta puntuació o edat.")
+    import os
+
+# --- Registrar dades del pacient ---
+if resultat is not None:
+    registre_id = st.text_input("Número de registre del pacient (ex. NB2025-001)", "")
+    if st.button("💾 Guardar registre"):
+        dades_pacient = {
+            "Registre": registre_id,
+            "Categoria": categoria,
+            "Prova": prova,
+            col_ref: versio,
+            "Edat": edat,
+            "Puntuació": puntuacio,
+            "Escalar": resultat.get("Escalar", "-"),
+            "Percentil": resultat["Percentil"],
+            "Interpretació": interpretacio
+        }
+        # Fitxer on es guardaran els registres
+        file_path = "registres_pacients.xlsx"
+
+        if os.path.exists(file_path):
+            df_reg = pd.read_excel(file_path)
+            df_reg = pd.concat([df_reg, pd.DataFrame([dades_pacient])], ignore_index=True)
+        else:
+            df_reg = pd.DataFrame([dades_pacient])
+
+        df_reg.to_excel(file_path, index=False)
+        st.success(f"✅ Registre {registre_id} guardat correctament!")
+
