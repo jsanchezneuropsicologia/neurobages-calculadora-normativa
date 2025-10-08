@@ -195,9 +195,6 @@ if resultat is not None:
         file_name=f"Informe_{prova.replace(' ', '_')}_{edat}anys.pdf",
         mime="application/pdf"
     )
-else:
-    st.warning("⚠️ No s'ha trobat un barem exacte per aquesta puntuació o edat.")
-    import os
 
 # --- Registrar dades del pacient ---
 if resultat is not None:
@@ -225,4 +222,6 @@ if resultat is not None:
 
         df_reg.to_excel(file_path, index=False)
         st.success(f"✅ Registre {registre_id} guardat correctament!")
-
+else:
+    st.warning("⚠️ No s'ha trobat un barem exacte per aquesta puntuació o edat.")
+    import os
